@@ -1,4 +1,5 @@
 # 这个文件 是 自定义模板标签
+# 使用的地方是类似 base.html之类的模版  用来替换模版标签 填充内容
 from ..models import Post, Category
 from django import template
 
