@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+import markdown
+from django.utils.html import strip_tags
 # Create your models here.
 
 # Category 分类
@@ -39,6 +40,19 @@ class Post(models.Model):
     # 文章正文
     body = models.TextField()
 
+    # views 字段记录阅读量
+    # PositiveIntegerField，该类型的值只允许为正整数或 0，因为阅读量不可能为负值。初始化时 views 的值为 0。
+    views = models.PositiveIntegerField(default=0)
+
+    # increase_views 方法用来自动累加阅读量 每当有人访问该篇文章阅读量就+1
+    # 注意这里使用了 update_fields 参数来告诉 Django 只更新数据库中 views 字段的值，以提高效率。
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views'])
+
+    # 文章的摘要（可以为空 下面save方法用来 自动提取文章摘要-从正文body中提取）
+    excerpt = models.CharField(max_length=200, blank=True)
+
     # 文章的创建和最后一次修改时间
     created_time = models.DateTimeField()
     modified_time = models.DateTimeField()
@@ -57,3 +71,23 @@ class Post(models.Model):
     # 因为我们规定一篇文章只能有一个作者，而一个作者可能会写多篇文章，因此这是一对多的关联关系，和 Category 类似。
     author = models.ForeignKey(User)
 
+    def save(self, *args, **kwargs):
+        # 如果没有填写摘要
+        if not self.excerpt:
+            # 首先实例化一个 Markdown 类，用于渲染 body 的文本
+            md = markdown.Markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+            ])
+            # 先将 Markdown 文本渲染成 HTML 文本
+            # strip_tags 去掉 HTML 文本的全部 HTML 标签
+            # 从文本摘取前 54 个字符赋给 excerpt
+            self.excerpt = strip_tags(md.convert(self.body))[:54]
+
+        # 调用父类的 save 方法将数据保存到数据库中
+        super(Post, self).save(*args, **kwargs)
+
+    # 定义一个 Meta 的内部类，这个内部类通过指定一些属性来规定这个类该有的一些特性
+    # 这里指定排序方式 为创建时间  逆序  定义了这个方法后 就是说之后 POST这个表查询出来的东西默认都是逆序排列
+    class Meta:
+        ordering = ['-created_time']

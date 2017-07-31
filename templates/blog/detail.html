@@ -1,3 +1,4 @@
+<!-- 模板继承自base.html    main 和 toc 都是占位框-->
 {% extends 'base.html' %}
 {% block main %}
     <article class="post post-{{ post.pk }}">
@@ -8,8 +9,8 @@
       <span class="post-date"><a href="#"><time class="entry-date"
                                                 datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
       <span class="post-author"><a href="#">{{ post.author }}</a></span>
-      <span class="comments-link"><a href="#">4 评论</a></span>
-      <span class="views-count"><a href="#">588 阅读</a></span>
+      <span class="comments-link"><a href="#">评论数:{{ post.comment_set.count }}</a></span>
+      <span class="views-count"><a href="#">阅读量:{{ post.views }}</a></span>
     </div>
   </header>
   <div class="entry-content clearfix">
@@ -17,12 +18,11 @@
   </div>
 </article>
 <!-- 下面是评论相关代码-->
+<!-- 评论列表显示的部分-->
 <section class="comment-area">
-
     <ul class="comment-list list-unstyled">
   {% for comment in comment_list %}
   <li class="comment-item">
-
     <div class="text">
       {{ comment.text }}
     </div>
@@ -31,7 +31,9 @@
   {% empty %}
   暂无评论
   {% endfor %}
-        <form action="{% url 'comments:post_comment' post.pk %}" method="post" class="comment-form">
+    </ul>
+    <!-- 评论表单部分-->
+    <form action="{% url 'comments:post_comment' post.pk %}" method="post" class="comment-form">
   {% csrf_token %}
   <div class="row">
     <div class="col-md-12">
@@ -42,29 +44,29 @@
     </div>
   </div>    <!-- row -->
 </form>
-</ul>
 
+    <!-- 下面是文章目录部分 -->
 </section>
 {% endblock main %}
 {% block toc %}
-    <div class="widget widget-content">
-        <h3 class="widget-title">文章目录</h3>
-        <ul>
-            <li>
-                <a href="#">教程特点</a>
-            </li>
-            <li>
-                <a href="#">谁适合这个教程</a>
-            </li>
-            <li>
-                <a href="#">在线预览</a>
-            </li>
-            <li>
-                <a href="#">资源列表</a>
-            </li>
-            <li>
-                <a href="#">获取帮助</a>
-            </li>
+<div class="widget widget-content">
+    <h3 class="widget-title">文章目录</h3>
+    <ul class="list-unstyled">
+        <li>
+            <a href="#">教程特点</a>
+        </li>
+        <li>
+            <a href="#">谁适合这个教程</a>
+        </li>
+        <li>
+            <a href="#">在线预览</a>
+        </li>
+        <li>
+            <a href="#">资源列表</a>
+        </li>
+        <li>
+            <a href="#">获取帮助</a>
+        </li>
         </ul>
     </div>
 {% endblock toc %}

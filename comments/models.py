@@ -14,3 +14,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[:20]
+
+    # Meta内部类 定义了 该类默认的排序规则
+    class Meta:
+        ordering = ['-created_time']
