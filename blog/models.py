@@ -54,8 +54,9 @@ class Post(models.Model):
     excerpt = models.CharField(max_length=200, blank=True)
 
     # 文章的创建和最后一次修改时间
-    created_time = models.DateTimeField()
-    modified_time = models.DateTimeField()
+    # auto_now_add 自动保存当前时间 进数据
+    created_time = models.DateTimeField(auto_now_add=True)
+    modified_time = models.DateTimeField(auto_now_add=True)
 
     # 将上面创建的分类和标签与文章联系起来
     # 我们规定 一篇文章只能对应一个分类 但一个分类下可以有多篇文章 所以是一对多的关系 ForeignKey 代表一对多
@@ -71,6 +72,7 @@ class Post(models.Model):
     # 因为我们规定一篇文章只能有一个作者，而一个作者可能会写多篇文章，因此这是一对多的关联关系，和 Category 类似。
     author = models.ForeignKey(User)
 
+    # 提出文章正文摘要的方法
     def save(self, *args, **kwargs):
         # 如果没有填写摘要
         if not self.excerpt:
@@ -82,7 +84,7 @@ class Post(models.Model):
             # 先将 Markdown 文本渲染成 HTML 文本
             # strip_tags 去掉 HTML 文本的全部 HTML 标签
             # 从文本摘取前 54 个字符赋给 excerpt
-            self.excerpt = strip_tags(md.convert(self.body))[:54]
+            self.excerpt = strip_tags(md.convert(self.body))[:54]+'...'
 
         # 调用父类的 save 方法将数据保存到数据库中
         super(Post, self).save(*args, **kwargs)

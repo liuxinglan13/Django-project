@@ -219,25 +219,24 @@ img {
 }
 
 .entry-title {
-    text-align: center;
     font-size: 1.9em;
+    font-weight:bold;
     margin-bottom: 20px;
-    line-height: 1.6;
-    padding: 10px 20px 0;
+    line-height: 1;
+    padding: 0 0 0;
 }
 
 .entry-meta {
-    text-align: center;
     color: #DDDDDD;
     font-size: 13px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .entry-content {
     font-size: 18px;
     line-height: 1.9;
     font-weight: 300;
-    color: #000;
+    color: rgba(41, 29, 35, 0.85);
 }
 
 .post-category::after,
@@ -902,4 +901,17 @@ img {
 
 .current a {
     color: red;
+}
+
+/**
+    hr-css  是一个 hr 分隔线的CSS
+ */
+
+.hr-css {
+    margin-top:7px;
+    *margin: 0;
+    border: 0;
+    color: black;
+    background-color: darkgray;
+    height: 1px
 }

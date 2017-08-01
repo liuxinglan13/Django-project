@@ -8,6 +8,16 @@
                   <h1 class="entry-title">
                       <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
                   </h1>
+                  <div class="entry-content clearfix">
+                        <!-- 帖子的摘要 -->
+                        <p>{{ post.excerpt }}</p>
+
+                        <!--    继续阅读按钮
+                        <div class="read-more cl-effect-14">
+                            <a href="{{ post.get_absolute_url }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+                        </div>
+                        -->
+                    </div>
                   <div class="entry-meta">
                       <!-- 分类名 -->
                       <span class="post-category"><a href="#">{{ post.category.name}}</a></span>
@@ -22,13 +32,7 @@
                       <span class="views-count"><a href="#">阅读量:{{ post.views }}</a></span>
                   </div>
                     </header>
-                    <div class="entry-content clearfix">
-                        <!-- 帖子的摘要 -->
-                        <p>{{ post.excerpt }}</p>
-                        <div class="read-more cl-effect-14">
-                            <a href="{{ post.get_absolute_url }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
-                        </div>
-                    </div>
+            <hr class="hr-css">
         </article>
     {% empty %}
         <div class="no-post">暂时还没有发布的文章！</div>
