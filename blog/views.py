@@ -4,13 +4,14 @@ from .models import Post
 import markdown
 from comments.forms import CommentForm
 from django.views.generic import ListView, DetailView
+import datetime, timeago
 
 
 # Create your views here.
 
 # 类视图函数
 
-
+'''
 class IndexView(ListView):
     # 将 model 指定为 Post，告诉 Django 我要获取的模型是 Post。
     model = Post
@@ -22,14 +23,28 @@ class IndexView(ListView):
     # 指定 paginate_by 属性后开启分页功能，其值代表每一页包含多少篇文章
     paginate_by = 5
 
-# 函数试图    上下两者作用是一样的
+    def get_context_data(self, **kwargs):
+        # 覆写 get_context_data 的目的是因为除了将 post 传递给模板外（DetailView 已经帮我们完成），
+        # 还要把评论表单、post 下的评论列表传递给模板。
+        context = super(IndexView, self).get_context_data(**kwargs)
+        now = datetime.datetime.now()
+        context['timeago'] = self.object.time_ago(self.object.created_time, now)
+        return context
 '''
-def index(request):
+
+# 函数试图    上下两者作用是一样的
+
+def IndexView(request):
     # - 表示逆序 不加则是正序
     post_list = Post.objects.all()[:5]
+    now = datetime.datetime.now()
+    # time_list = Post.objects.created_time.all()
+    # Post.timeago = timeago.format(time, now, 'zh_CN')
+    for post in post_list:
+        post.timeago = timeago.format(post.created_time, now, 'zh_CN')
     context = {'post_list': post_list}
     return render(request, 'blog/index.html', context)
-'''
+
 
 
 # 用类试图 重新 detail函数
@@ -50,6 +65,7 @@ class PostDetailView(DetailView):
         # 将文章阅读量 +1
         # 注意 self.object 的值就是被访问的文章 post
         self.object.increase_views()
+
 
         # 视图必须返回一个 HttpResponse 对象
         return response

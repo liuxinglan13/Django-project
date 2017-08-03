@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 import markdown
 from django.utils.html import strip_tags
+import timeago
 # Create your models here.
 
 # Category 分类
@@ -58,6 +59,13 @@ class Post(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now_add=True)
 
+    # 将文章创建时间和当前时间做 timeago 处理 就是那种 几分钟前，几天前，几个月前那种效果  存储这个处理后的字段
+    timeago = models.CharField(max_length=200, blank=True)
+
+    def time_ago(self, created_time, date):
+        self.timeago = timeago.format(created_time, date, 'zh_CN')
+        self.save(update_fields=['timeago'])
+
     # 将上面创建的分类和标签与文章联系起来
     # 我们规定 一篇文章只能对应一个分类 但一个分类下可以有多篇文章 所以是一对多的关系 ForeignKey 代表一对多
     # 而对于标签来说，一篇文章可以有多个标签，同一个标签下也可能有多篇文章，所以我们使用 ManyToManyField，表明这是多对多的关联关系
@@ -93,3 +101,4 @@ class Post(models.Model):
     # 这里指定排序方式 为创建时间  逆序  定义了这个方法后 就是说之后 POST这个表查询出来的东西默认都是逆序排列
     class Meta:
         ordering = ['-created_time']
+

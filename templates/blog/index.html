@@ -22,8 +22,7 @@
                       <!-- 分类名 -->
                       <span class="post-category"><a href="#">{{ post.category.name}}</a></span>
                       <!-- 文章发布时间 -->
-                      <span class="post-date"><a href="#"><time class="entry-date"
-                                                                      datetime="{{post.created_time}}">{{post.created_time}}</time></a></span>
+                      <span class="post-date"><a href="#">{{post.timeago}}</a></span>
                       <!-- 作者 -->
                       <span class="post-author"><a href="#">{{post.author}}</a></span>
                       <!-- 评论数量 post.comment_set.count 查询出该篇文章下的所有评论列表 .count 统计总数-->
