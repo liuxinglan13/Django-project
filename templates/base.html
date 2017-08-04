@@ -122,7 +122,7 @@
                     <ul>
                         {% for category in category_list %}
                         <li>
-                            <a href="#">{{category.name}}<span class="post-count">(13)</span></a>
+                            <a href="{% url 'blog:category' category.pk %}">{{category.name}}<span class="post-count">({{ category.num_posts}})</span></a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -130,10 +130,11 @@
 
                 <div class="widget widget-tag-cloud">
                     <h3 class="widget-title">标签云</h3>
+                    {% get_tag as tag_list %}
                     <ul>
-                        {% for tag in tag_list %}
+                        {% for Tag in tag_list %}
                         <li>
-                            <a href="#">{{tag.name}}</a>
+                            <a href="{% url 'blog:tag' Tag.pk %}">{{Tag.name}}</a>
                         </li>
                         {% endfor %}
                     </ul>

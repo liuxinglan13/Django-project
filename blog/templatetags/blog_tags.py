@@ -1,7 +1,8 @@
 # 这个文件 是 自定义模板标签
 # 使用的地方是类似 base.html之类的模版  用来替换模版标签 填充内容
-from ..models import Post, Category
+from ..models import Post, Category, Tag
 from django import template
+from django.db.models.aggregates import Count
 
 register = template.Library()
 
@@ -20,6 +21,15 @@ def archives():
 
 
 # 分类模板标签
+# 以下方法输出两个属性   Category.name    所有的分类名
+#                        Category.num_posts   相应分类名下的文章的总数
+# 使用了 模型管理器 objects 的 annotate 方法
 @register.simple_tag
 def get_categories():
-    return Category.objects.all()
+    return Category.objects.annotate(num_posts=Count('post')).filter(num_posts__gt=0)
+
+# 标签云
+# 1
+@register.simple_tag
+def get_tag():
+    return Tag.objects.all()
