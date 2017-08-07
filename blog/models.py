@@ -4,6 +4,7 @@ from django.urls import reverse
 import markdown
 from django.utils.html import strip_tags
 import timeago
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 # Category 分类
@@ -39,7 +40,8 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'pk': self.pk})
     # 文章正文
-    body = models.TextField()
+    # RichTextUploadingField()  是富文本编辑器ckeditor 的自定义控件
+    body = RichTextUploadingField(verbose_name='正文')
 
     # views 字段记录阅读量
     # PositiveIntegerField，该类型的值只允许为正整数或 0，因为阅读量不可能为负值。初始化时 views 的值为 0。

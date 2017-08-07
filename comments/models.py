@@ -1,6 +1,7 @@
 from django.db import models
 import timeago
 
+
 # Create your models here.
 # 这是评论app 的 模型
 

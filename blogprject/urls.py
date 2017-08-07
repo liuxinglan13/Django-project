@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('blog.urls', namespace='blog')),
     url(r'', include('comments.urls')),
-]
+    url(r'', include('ckeditor_uploader.urls')),                  # 富文本编辑器ckeditor相关
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 没有这一句无法显示上传的图片

@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',  # 注册blog应用
     'comments',  # 注册评论app
+    'ckeditor',  # 富文本编辑器 ckeditor
+    'ckeditor_uploader',   # 富文本编辑器 ckeditor 图片文件上传
+
 ]
 
 MIDDLEWARE = [
@@ -120,3 +123,65 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 富文本编辑器 相关配置
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+CKEDITOR_UPLOAD_PATH = 'upload/'
+
+# pillow 插件负责处理图片 缩略图
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+
+# 编辑器样式定制相关设置
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        'language':'zh-cn',
+        'width': '750px',
+        'height': '500px',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'basicstyles',
+                'items': ['Bold', 'Italic', 'Underline', 'Strike']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
+                       '-','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor', '-', 'RemoveFormat']},
+            {'name': 'insert',
+             'items': ['Image', '-', 'Flash', 'Iframe', '-', 'Table', 'CodeSnippet', 'Templates']},
+            '/',
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'styles', 'items': ['Format', 'Font', 'FontSize']},
+            {'name': 'special', 'items': ['Subscript', 'Superscript', '-', 'HorizontalRule',
+                                          'SpecialChar', 'Smiley']},
+            {'name': 'tools', 'items': ['Undo', 'Redo', '-', 'Source', 'Preview', 'Save', '-', 'Maximize']}
+        ],
+        'toolbar': 'YourCustomToolbarConfig',
+        'tabSpaces': 4,
+        'extraPlugins': ','.join(
+            [
+                'div',
+                'autolink',
+                'autoembed',
+                'embedsemantic',
+                'autogrow',
+                'widget',
+                'lineutils',
+                'clipboard',
+                'dialog',
+                'dialogui',
+                'elementspath',
+                'codesnippet',
+                'uploadimage',
+                'prism',
+            ]),
+    }
+}
+
+# 富文本编辑器 相关配置
