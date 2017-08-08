@@ -214,8 +214,8 @@ img {
 }
 
 .post {
-    background: #fff;
-    padding: 30px 30px 0;
+    background: #FFF;
+    padding: 1em 1em 0 1em;
 }
 
 .entry-title {
@@ -230,6 +230,7 @@ img {
     color: #DDDDDD;
     font-size: 13px;
     margin-bottom: 10px;
+    padding: 0 0 0.5em 0
 }
 
 .entry-content {

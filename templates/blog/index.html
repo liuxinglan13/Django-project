@@ -22,7 +22,7 @@
                       <!-- 分类名 -->
                       <span class="post-category"><a href="#">{{ post.category.name}}</a></span>
                       <!-- 文章发布时间 -->
-                      <span class="post-date"><a href="#">{{post.timeago}}</a></span>
+                      <span class="post-date"><a href="#">{{post.created_time|timesince}}前</a></span>
                       <!-- 作者 -->
                       <span class="post-author"><a href="#">{{post.author}}</a></span>
                       <!-- 评论数量 post.comment_set.count 查询出该篇文章下的所有评论列表 .count 统计总数-->
@@ -31,7 +31,7 @@
                       <span class="views-count"><a href="#">阅读量:{{ post.views }}</a></span>
                   </div>
                     </header>
-            <hr class="hr-css">
+                <hr class="hr-css">
         </article>
     {% empty %}
         <div class="no-post">暂时还没有发布的文章！</div>

@@ -6,7 +6,7 @@
     <h1 class="entry-title">{{ post.title }}</h1>
     <div class="entry-meta">
       <span class="post-category"><a href="#">{{ post.category.name }}</a></span>
-        <span class="post-author"><a href="#">{{ post.timeago }}</a></span>
+        <span class="post-data"><a href="#">{{ post.created_time|timesince }}前</a></span>
       <span class="post-author"><a href="#">{{ post.author }}</a></span>
       <span class="comments-link"><a href="#">评论数:{{ post.comment_set.count }}</a></span>
       <span class="views-count"><a href="#">阅读量:{{ post.views }}</a></span>
@@ -25,7 +25,7 @@
     <div class="text">
       {{ comment.text }}
     </div>
-      <time class="submit-date">{{ comment.created_time }}</time>
+      <time class="submit-date">{{ comment.created_time|timesince }}前</time>
   </li>
   {% empty %}
   暂无评论

@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 import markdown
 from django.utils.html import strip_tags
-import timeago
 from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
@@ -61,12 +60,6 @@ class Post(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now_add=True)
 
-    # 将文章创建时间和当前时间做 timeago 处理 就是那种 几分钟前，几天前，几个月前那种效果  存储这个处理后的字段
-    timeago = models.CharField(max_length=200, blank=True)
-
-    def time_ago(self, created_time, date):
-        self.timeago = timeago.format(created_time, date, 'zh_CN')
-        self.save(update_fields=['timeago'])
 
     # 将上面创建的分类和标签与文章联系起来
     # 我们规定 一篇文章只能对应一个分类 但一个分类下可以有多篇文章 所以是一对多的关系 ForeignKey 代表一对多

@@ -1,13 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from .models import Post, Category, Tag
 import markdown
 from comments.forms import CommentForm
 from django.views.generic import ListView, DetailView
-import datetime
-
-
-# Create your views here.
 
 # 类视图函数
 
@@ -21,18 +16,7 @@ class IndexView(ListView):
     context_object_name = 'post_list'
     # 类视图 ListView 自带分页功能
     # 指定 paginate_by 属性后开启分页功能，其值代表每一页包含多少篇文章
-    paginate_by = 5
-
-    # 在这里我们 获取 所有的文章列表数据  提取 文章创建时间 进行timeago处理
-    # get_queryser 该方法默认获取指定模型的全部列表数据
-    def get_queryset(self):
-        # 调用父类的get_queryset方法获取所有的文章列表数据
-        post_list = super(IndexView, self).get_queryset()
-        now = datetime.datetime.now()
-        # 用for 循环 将 列表中的每个 创建时间 调用方法处理成 timeago字段
-        for post in post_list:
-            post.time_ago(post.created_time, now)
-        return post_list
+    paginate_by = 8
 
     # 分页效果 加强
     # 类似这种效果 1..3 4 5..10  类似这种智能的效果
