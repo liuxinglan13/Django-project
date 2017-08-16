@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-import markdown
 from django.utils.html import strip_tags
 from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.

@@ -216,6 +216,7 @@ img {
 .post {
     background: #FFF;
     padding: 1em 1em 0 1em;
+
 }
 
 .entry-title {
@@ -224,6 +225,12 @@ img {
     margin-bottom: 20px;
     line-height: 1;
     padding: 0 0 0;
+}
+
+
+.index-entry-header {
+    border-bottom: solid 1px;
+    border-color: #e74851;
 }
 
 .entry-meta {
@@ -843,8 +850,9 @@ img {
 }
 
 .comment-form {
-    margin-top: 15px;
+
 }
+
 
 .comment-form .comment-btn {
     background-color: #fff;

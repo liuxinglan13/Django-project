@@ -3,7 +3,7 @@
 {% block main %}
     {% for post in post_list %}
         <article class="post post-1">
-              <header class="entry-header">
+              <header class="index-entry-header">
                   <!-- h1 标签 代表 标题-->
                   <h1 class="entry-title">
                       <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
@@ -31,7 +31,7 @@
                       <span class="views-count"><a href="#">阅读量:{{ post.views }}</a></span>
                   </div>
                     </header>
-                <hr class="hr-css">
+
         </article>
     {% empty %}
         <div class="no-post">暂时还没有发布的文章！</div>

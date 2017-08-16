@@ -38,11 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',  # 注册blog应用
-    'comments',  # 注册评论app
     'ckeditor',  # 富文本编辑器 ckeditor
     'ckeditor_uploader',   # 富文本编辑器 ckeditor 图片文件上传
+    'mptt',
+    'easy_comment',
+    'notifications',
+    'online_status',
 
 ]
+
+COMMENT_ENTRY_MODEL = 'blog.Post'  # 格式是 app_name+model_name
+AUTH_USER_MODEL = 'auth.user'     # 格式是 app_name+model_name
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,48 +146,19 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 # 编辑器样式定制相关设置
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
-        'language':'zh-cn',
-        'width': '750px',
-        'height': '500px',
-        'toolbar_Basic': [
-            ['Source', '-', 'Bold', 'Italic']
-        ],
-        'toolbar_YourCustomToolbarConfig': [
-            {'name': 'basicstyles',
-                'items': ['Bold', 'Italic', 'Underline', 'Strike']},
-            {'name': 'paragraph',
-             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
-                       '-','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
-            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor', '-', 'RemoveFormat']},
-            {'name': 'insert',
-             'items': ['Image', '-', 'Flash', 'Iframe', '-', 'Table', 'CodeSnippet', 'Templates']},
-            '/',
-            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
-            {'name': 'styles', 'items': ['Format', 'Font', 'FontSize']},
-            {'name': 'special', 'items': ['Subscript', 'Superscript', '-', 'HorizontalRule',
-                                          'SpecialChar', 'Smiley']},
-            {'name': 'tools', 'items': ['Undo', 'Redo', '-', 'Source', 'Preview', 'Save', '-', 'Maximize']}
-        ],
-        'toolbar': 'YourCustomToolbarConfig',
+        # 编辑器的宽高请根据你的页面自行设置
+        'width':'748px',
+        'height':'150px',
+        'image_previewText':' ',
         'tabSpaces': 4,
-        'extraPlugins': ','.join(
-            [
-                'div',
-                'autolink',
-                'autoembed',
-                'embedsemantic',
-                'autogrow',
-                'widget',
-                'lineutils',
-                'clipboard',
-                'dialog',
-                'dialogui',
-                'elementspath',
-                'codesnippet',
-                'uploadimage',
-                'prism',
-            ]),
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline', 'Format', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
+            ['Blockquote', 'CodeSnippet'],
+            ['Image', 'Link', 'Unlink']
+        ],
+        'extraPlugins': ','.join(['codesnippet','uploadimage','prism','widget','lineutils',]),
     }
 }
 
