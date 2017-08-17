@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block main %}
+<ul class="list-group">
     {% for post in post_list %}
-        <article class="post post-1">
+        <li class="list-group-item">
               <header class="index-entry-header">
                   <!-- h1 标签 代表 标题-->
                   <h1 class="entry-title">
@@ -32,16 +33,16 @@
                   </div>
                     </header>
 
-        </article>
+        </li>
     {% empty %}
         <div class="no-post">暂时还没有发布的文章！</div>
     {% endfor %}
-
+ </ul>
 
 <!-- 分页效果代码-->
 
 {% if is_paginated %}
-<div class="pagination">
+<nav>
     <ul>
   {% if first %}
     <a href="?page=1">1</a>
@@ -67,7 +68,7 @@
     <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
   {% endif %}
 </ul>
-</div>
+</nav>
 {% endif %}
 {% endblock main %}
 

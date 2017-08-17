@@ -15,13 +15,14 @@
   <div class="entry-content clearfix">
     {{ post.body|safe}}
   </div>
+        {% include 'easy_comment/comment_list.html' with post=post %}
+  {% include 'easy_comment/comment_form.html' with post=post %}
 </article>
 <!-- 下面是评论相关代码-->
 <!-- 评论列表显示的部分-->
 
   {% csrf_token %}
-  {% include 'easy_comment/comment_list.html' with post=post %}
-  {% include 'easy_comment/comment_form.html' with post=post %}
+
 
 {% endblock main %}
 {% block toc %}

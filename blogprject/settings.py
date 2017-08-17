@@ -147,7 +147,7 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     'default': {
         # 编辑器的宽高请根据你的页面自行设置
-        'width':'748px',
+        'width':'717px',
         'height':'150px',
         'image_previewText':' ',
         'tabSpaces': 4,

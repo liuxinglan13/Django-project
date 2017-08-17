@@ -61,6 +61,7 @@ a:hover, a:focus {
 body {
     color: #444;
     font-family: 'Lato', sans-serif;
+    background-color: #f7f7f7;
 }
 
 p {
@@ -213,9 +214,22 @@ img {
     padding-bottom: 4em;
 }
 
+.list-group {
+    list-style-type: none;
+}
+
+.list-group-item {
+    background: #FFF;
+    padding: 1em 1em 0 1em;
+    background-color: #fff;
+    margin-bottom: -1px;
+}
+
 .post {
     background: #FFF;
     padding: 1em 1em 0 1em;
+    border: 1px solid rgba(0,0,0,.125);
+    background-color: #fff;
 
 }
 
@@ -228,10 +242,6 @@ img {
 }
 
 
-.index-entry-header {
-    border-bottom: solid 1px;
-    border-color: #e74851;
-}
 
 .entry-meta {
     color: #DDDDDD;
@@ -344,7 +354,9 @@ img {
 
 .widget {
     background: #fff;
-    padding: 30px 0 0;
+    padding: 1.25rem;
+    border: 1px solid rgba(0,0,0,.125);
+
 }
 
 .widget-title {
@@ -352,7 +364,7 @@ img {
     margin-bottom: 20px;
     line-height: 1.6;
     padding: 10px 0 0;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 .widget-recent-posts ul {
