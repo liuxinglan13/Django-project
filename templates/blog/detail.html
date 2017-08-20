@@ -1,18 +1,20 @@
 <!-- 模板继承自base.html    main 和 toc 都是占位框-->
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block main %}
     <article class="post post-{{ post.pk }}">
     <header class="entry-header">
+     <img width="48" height="48" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="{% static 'blog/img/moe.png' %}">
     <h1 class="entry-title">{{ post.title }}</h1>
     <div class="entry-meta">
-      <span class="post-category"><a href="#">{{ post.category.name }}</a></span>
+      <span class="post-category111"><a href="#">{{ post.category.name }}</a></span>
         <span class="post-data"><a href="#">{{ post.created_time|timesince }}前</a></span>
       <span class="post-author"><a href="#">{{ post.author }}</a></span>
       <span class="comments-link"><a href="#">评论数:{{ post.comment_set.count }}</a></span>
       <span class="views-count"><a href="#">阅读量:{{ post.views }}</a></span>
     </div>
   </header>
-  <div class="entry-content clearfix">
+  <div>
     {{ post.body|safe}}
   </div>
         {% include 'easy_comment/comment_list.html' with post=post %}

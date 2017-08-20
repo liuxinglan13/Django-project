@@ -234,9 +234,9 @@ img {
 }
 
 .entry-title {
-    font-size: 1.9em;
+    font-size: 1.7em;
     font-weight:bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     line-height: 1;
     padding: 0 0 0;
 }
@@ -257,13 +257,7 @@ img {
     color: rgba(41, 29, 35, 0.85);
 }
 
-.post-category::after,
-.post-date::after,
-.post-author::after,
-.comments-link::after {
-    content: ' ·';
-    color: #000;
-}
+
 
 /**
  * 4.1 - Read More Button CSS 3 style

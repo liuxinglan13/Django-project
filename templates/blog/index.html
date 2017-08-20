@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block main %}
 <ul class="list-group">
     {% for post in post_list %}
         <li class="list-group-item">
               <header class="index-entry-header">
                   <!-- h1 标签 代表 标题-->
+                  <img width="48" height="48" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="{% static 'blog/img/moe.png' %}">
                   <h1 class="entry-title">
                       <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
                   </h1>
@@ -21,7 +22,8 @@
                     </div>
                   <div class="entry-meta">
                       <!-- 分类名 -->
-                      <span class="post-category"><a href="#">{{ post.category.name}}</a></span>
+                      <!--<span class="post-category11"><a href="#">{{ post.category.name}}</a></span>-->
+                      <a class="post-category post-category-design" href="#">{{ post.category.name}}</a>
                       <!-- 文章发布时间 -->
                       <span class="post-date"><a href="#">{{post.created_time|timesince}}前</a></span>
                       <!-- 作者 -->
