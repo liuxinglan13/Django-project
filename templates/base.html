@@ -42,44 +42,103 @@
 </head>
 
 <body>
-<div class="container">
-    <header id="site-header">
-        <div class="row">
-            <div class="col-md-4 col-sm-5 col-xs-8">
-                <div class="logo">
-                    <h1><a href="{% url 'blog:index' %}"><b>镜kong</b> &amp; Blog</a></h1>
-                </div>
-            </div><!-- col-md-4 -->
-            <div class="col-md-8 col-sm-7 col-xs-4">
-                <nav class="main-nav" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" id="trigger-overlay" class="navbar-toggle">
-                            <span class="ion-navicon"></span>
-                        </button>
-                    </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="cl-effect-11"><a href="index.html" data-hover="首页">首页</a></li>
-                            <li class="cl-effect-11"><a href="full-width.html" data-hover="博客">博客</a></li>
-                            <li class="cl-effect-11"><a href="admin/" data-hover="后台">后台</a></li>
-                            <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </nav>
-                <div id="header-search-box">
-                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
-                    <div id="search-form" class="search-form">
-                        <form role="search" method="get" id="searchform" action="#">
-                            <input type="search" placeholder="搜索" required>
-                            <button type="submit"><span class="ion-ios-search-strong"></span></button>
-                        </form>
-                    </div>
-                </div>
-            </div><!-- col-md-8 -->
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
         </div>
-    </header>
-</div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!--<div class="container">-->
+    <!--<header id="site-header">-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-4 col-sm-5 col-xs-8">-->
+                <!--<div class="logo">-->
+                    <!--<h1><a href="{% url 'blog:index' %}"><b>镜kong</b> &amp; Blog</a></h1>-->
+                <!--</div>-->
+            <!--</div>&lt;!&ndash; col-md-4 &ndash;&gt;-->
+            <!--<div class="col-md-8 col-sm-7 col-xs-4">-->
+                <!--<nav class="main-nav" role="navigation">-->
+                    <!--<div class="navbar-header">-->
+                        <!--<button type="button" id="trigger-overlay" class="navbar-toggle">-->
+                            <!--<span class="ion-navicon"></span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+
+                    <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+                        <!--<ul class="nav navbar-nav navbar-right">-->
+
+                            <!--<li class="cl-effect-11"><a href="admin/" data-hover="后台">后台</a></li>-->
+                            <!--{% if user.is_authenticated %}-->
+                            <!--<li class="cl-effect-11"><p>{{ user.username }}</p></li>-->
+                            <!--<li class="cl-effect-11"><a href="{% url 'logout' %}?next={{ request.path }}" data-hover="注销登录">注销登录</a></li>-->
+                            <!--<li class="cl-effect-11"><a href="{% url 'users:account_profile' %}?next={{ request.path }}" data-hover="注销登录">修改资料</a></li>-->
+                            <!--{% else %}-->
+                            <!--<li class="cl-effect-11"><a href="{% url 'login' %}?next={{ request.path }}" data-hover="登录">登录</a></li>-->
+                            <!--<li class="cl-effect-11"><a href="{% url 'users:register' %}" data-hover="注册">注册</a></li>-->
+                            <!--{% endif %}-->
+                        <!--</ul>-->
+                    <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+                <!--</nav>-->
+                <!--<div id="header-search-box">-->
+                    <!--<a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>-->
+                    <!--<div id="search-form" class="search-form">-->
+                        <!--<form role="search" method="get" id="searchform" action="#">-->
+                            <!--<input type="search" placeholder="搜索" required>-->
+                            <!--<button type="submit"><span class="ion-ios-search-strong"></span></button>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>&lt;!&ndash; col-md-8 &ndash;&gt;-->
+        <!--</div>-->
+    <!--</header>-->
+<!--</div>-->
 <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
 <div class="copyrights">Modified by <a href="http://zmrenwu.com/">追梦人物的博客</a></div>
 

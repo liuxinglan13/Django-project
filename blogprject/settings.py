@@ -41,14 +41,15 @@ INSTALLED_APPS = [
     'ckeditor',  # 富文本编辑器 ckeditor
     'ckeditor_uploader',   # 富文本编辑器 ckeditor 图片文件上传
     'mptt',
-    'easy_comment',
+    'easy_comment',        # 第三方评论模块
     'notifications',
     'online_status',
+    'users',               # 扩展用户模块（主要是头像上传，个人资料等，注册，登录，修改密码，重置密码）
 
 ]
 
 COMMENT_ENTRY_MODEL = 'blog.Post'  # 格式是 app_name+model_name
-AUTH_USER_MODEL = 'auth.user'     # 格式是 app_name+model_name
+AUTH_USER_MODEL = 'users.User'     # 格式是 app_name+model_name
 
 
 MIDDLEWARE = [

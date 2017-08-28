@@ -6,8 +6,8 @@
         <li class="list-group-item">
               <header class="index-entry-header">
                   <!-- h1 标签 代表 标题-->
-                  <span class="post-author"><a href="#">{{post.author}}</a></span>
-                  <img width="48" height="48" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="{% static 'blog/img/moe.png' %}">
+                  <span class="post-author"><a href="#">{{ post.author }}</a></span>
+                  <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="{{ post.author.avatar.url }}">
                   <h1 class="entry-title">
                       <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
                   </h1>
@@ -42,9 +42,7 @@
     {% empty %}
         <div class="no-post">暂时还没有发布的文章！</div>
     {% endfor %}
- </ul>
-
-<!-- 分页效果代码-->
+    <!-- 分页效果代码-->
 
 {% if is_paginated %}
 <nav aria-label="Page navigation">
@@ -74,6 +72,9 @@
   {% endif %}
 </ul>
 </nav>
+ </ul>
+
+
 
 {% endif %}
 {% endblock main %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<a href="{% url 'blog:index' %}">返回首页</a>
+<body>
+<div class="local-header"><h4>个人资料</h4></div>
+    <form class="profile" method="post" enctype="multipart/form-data"
+        action="{% url 'users:account_profile' %}">
+        {% csrf_token %}
+        {{ form }}
+        <!--用户头像-->
+        <div class="avatar">
+            <img class="img-rounded" src="{{ request.user.avatar.url }}">
+        </div>
+        <button class="primaryAction" type="submit">更新资料</button>
+    </form>
+</body>
+{% if messages %}
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}" {% endif %} style="padding: 10px">{{ message }}</p>
+    {% endfor %}{% endif %}
+</html>

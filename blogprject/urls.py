@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'', include('ckeditor_uploader.urls')),   #富文本编辑器ckeditor相关
     url(r'', include('easy_comment.urls')),
     url(r'^notifications/', include(notifications.urls, namespace='notifications')),
+    url(r'^users/', include('users.urls')),                     # 自定义的扩展用户app
+    url(r'^users/', include('django.contrib.auth.urls')),       # Django内置的用户相关操作视图
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 没有这一句无法显示上传的图片

@@ -4,7 +4,7 @@
 {% block main %}
     <article class="post post-{{ post.pk }}">
     <header class="entry-header">
-     <img width="48" height="48" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="{% static 'blog/img/moe.png' %}">
+     <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="{{ post.author.avatar.url }}">
     <h1 class="entry-title">{{ post.title }}</h1>
     <div class="entry-meta">
       <span class="post-category111"><a href="#">{{ post.category.name }}</a></span>
@@ -17,15 +17,15 @@
   <div>
     {{ post.body|safe}}
   </div>
+        <!-- 评论列表显示的部分-->
         {% include 'easy_comment/comment_list.html' with post=post %}
+        <!-- 下面是评论输入框相关代码-->
   {% include 'easy_comment/comment_form.html' with post=post %}
 </article>
-<!-- 下面是评论相关代码-->
-<!-- 评论列表显示的部分-->
+
+
 
   {% csrf_token %}
-
-
 {% endblock main %}
 {% block toc %}
 <div class="widget widget-content">

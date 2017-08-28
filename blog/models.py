@@ -1,11 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.urls import reverse
-from django.utils.html import strip_tags
 from ckeditor_uploader.fields import RichTextUploadingField
+from users.models import User
+import markdown
+from django.utils.html import strip_tags
 # Create your models here.
 
 # Category 分类
+
 
 
 class Category(models.Model):
