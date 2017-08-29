@@ -2,16 +2,16 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block main %}
-    <article class="post post-{{ post.pk }}">
+    <ul class="list-group">
+        <li class="list-group-item">
     <header class="entry-header">
-     <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="{{ post.author.avatar.url }}">
+     <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" class="img-circle avatar-image-right" src="{{ post.author.avatar.url }}">
     <h1 class="entry-title">{{ post.title }}</h1>
     <div class="entry-meta">
-      <span class="post-category111"><a href="#">{{ post.category.name }}</a></span>
-        <span class="post-data"><a href="#">{{ post.created_time|timesince }}前</a></span>
-      <span class="post-author"><a href="#">{{ post.author }}</a></span>
-      <span class="comments-link"><a href="#">评论数:{{ post.comment_set.count }}</a></span>
-      <span class="views-count"><a href="#">阅读量:{{ post.views }}</a></span>
+      <span class="label label-default">{{ post.category.name}}</span>
+      <span class="label label-primary">{{post.created_time|timesince}}前</span>
+      <span class="glyphicon glyphicon-comment">{{ post.comment_set.count }}</span>
+        <span class="glyphicon glyphicon-eye-open">{{ post.views }}</span>
     </div>
   </header>
   <div>
@@ -21,31 +21,13 @@
         {% include 'easy_comment/comment_list.html' with post=post %}
         <!-- 下面是评论输入框相关代码-->
   {% include 'easy_comment/comment_form.html' with post=post %}
-</article>
+        </li>
+    </ul>
 
 
 
   {% csrf_token %}
 {% endblock main %}
 {% block toc %}
-<div class="widget widget-content">
-    <h3 class="widget-title">文章目录</h3>
-    <ul class="list-unstyled">
-        <li>
-            <a href="#">教程特点</a>
-        </li>
-        <li>
-            <a href="#">谁适合这个教程</a>
-        </li>
-        <li>
-            <a href="#">在线预览</a>
-        </li>
-        <li>
-            <a href="#">资源列表</a>
-        </li>
-        <li>
-            <a href="#">获取帮助</a>
-        </li>
-        </ul>
-    </div>
+
 {% endblock toc %}

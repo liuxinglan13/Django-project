@@ -1,48 +1,49 @@
 {% load staticfiles %}
-
 <!-- 导入自定义模板标签文件 blog/templatetags/blog_tags.py-->
 {% load blog_tags %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Black &amp; White</title>
-
     <!-- meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- css -->
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!--<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">-->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">-->
+    <!--<link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">-->
+    <!--自定义的css用来覆盖bootstrap的默认样式-->
     <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/prism.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'blog/css/prism.css' %}">-->
+    <!--<link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">-->
+
+    <!--这两个第三方评论系统easy_comment依赖的css文件-->
     <link rel="stylesheet" href="{% static 'easy_comment/css/comment.css' %}">
     <link rel="stylesheet" href="{% static 'easy_comment/css/prism.css' %}">
 
     <!-- js -->
-
+    <!--bootstrap的jquery库不可少-->
     <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+
+    <!--bootstrap的精简JS-->
     <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'blog/js/pace.min.js' %}"></script>
-    <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
+    <!--<script src="{% static 'blog/js/pace.min.js' %}"></script>-->
+    <!--<script src="{% static 'blog/js/modernizr.custom.js' %}"></script>-->
+
+    <!--代码高亮相关JS-->
     <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
 
-    <!-- Pure -->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-    <!--<meta name="description" content="A layout example that shows off a blog page with a list of posts.">-->
-    <!--<title>Blog &ndash; Layout Examples &ndash; Pure</title>-->
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
-    <!--<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">-->
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
-    <!--<link rel="stylesheet" href="{% static 'blog/css/blog-old-ie.css' %}">-->
-    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+    <!--内部样式 优先级比上面的外部样式要高
+    ***  这是修改bootstrap默认样式的一种方法
+    ***  还有一种做法就是 将下面这些内联样式放到一个自定义的CSS文件 比如 my-custom.css 然后引入进来放在bootstrap.css的后面
+    ***  更有效率的办法是定制自己的自定义bootstrap-->
+
 </head>
 
-<body>
-<nav class="navbar navbar-default">
+<body class="body-qiansebeijing">
+<nav class="navbar navbar-default bg-white" >
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -52,95 +53,39 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="{% url 'blog:index' %}">首页</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
+        <li><a href="admin/" data-hover="后台">后台</a></li>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+
+          {% if user.is_authenticated %}
+          <img width="45" height="45" src="{{ user.avatar.url }}" class="img-circle" alt="Responsive image">
+            <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
+            <li><a href="{% url 'logout' %}?next={{ request.path }}">注销登录</a></li>
+            <li><a href="{% url 'users:account_profile' %}?next={{ request.path }}">修改资料</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+             </ul>
+            </li>
+          {% else %}
+          <li><a href="{% url 'login' %}?next={{ request.path }}" data-hover="登录">登录</a></li>
+          <li><a href="{% url 'users:register' %}" data-hover="注册">注册</a></li>
+          {% endif %}
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<!--<div class="container">-->
-    <!--<header id="site-header">-->
-        <!--<div class="row">-->
-            <!--<div class="col-md-4 col-sm-5 col-xs-8">-->
-                <!--<div class="logo">-->
-                    <!--<h1><a href="{% url 'blog:index' %}"><b>镜kong</b> &amp; Blog</a></h1>-->
-                <!--</div>-->
-            <!--</div>&lt;!&ndash; col-md-4 &ndash;&gt;-->
-            <!--<div class="col-md-8 col-sm-7 col-xs-4">-->
-                <!--<nav class="main-nav" role="navigation">-->
-                    <!--<div class="navbar-header">-->
-                        <!--<button type="button" id="trigger-overlay" class="navbar-toggle">-->
-                            <!--<span class="ion-navicon"></span>-->
-                        <!--</button>-->
-                    <!--</div>-->
 
-                    <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
-                        <!--<ul class="nav navbar-nav navbar-right">-->
-
-                            <!--<li class="cl-effect-11"><a href="admin/" data-hover="后台">后台</a></li>-->
-                            <!--{% if user.is_authenticated %}-->
-                            <!--<li class="cl-effect-11"><p>{{ user.username }}</p></li>-->
-                            <!--<li class="cl-effect-11"><a href="{% url 'logout' %}?next={{ request.path }}" data-hover="注销登录">注销登录</a></li>-->
-                            <!--<li class="cl-effect-11"><a href="{% url 'users:account_profile' %}?next={{ request.path }}" data-hover="注销登录">修改资料</a></li>-->
-                            <!--{% else %}-->
-                            <!--<li class="cl-effect-11"><a href="{% url 'login' %}?next={{ request.path }}" data-hover="登录">登录</a></li>-->
-                            <!--<li class="cl-effect-11"><a href="{% url 'users:register' %}" data-hover="注册">注册</a></li>-->
-                            <!--{% endif %}-->
-                        <!--</ul>-->
-                    <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
-                <!--</nav>-->
-                <!--<div id="header-search-box">-->
-                    <!--<a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>-->
-                    <!--<div id="search-form" class="search-form">-->
-                        <!--<form role="search" method="get" id="searchform" action="#">-->
-                            <!--<input type="search" placeholder="搜索" required>-->
-                            <!--<button type="submit"><span class="ion-ios-search-strong"></span></button>-->
-                        <!--</form>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>&lt;!&ndash; col-md-8 &ndash;&gt;-->
-        <!--</div>-->
-    <!--</header>-->
-<!--</div>-->
-<div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
-<div class="copyrights">Modified by <a href="http://zmrenwu.com/">追梦人物的博客</a></div>
 
 <div class="content-body">
     <div class="container">
@@ -165,9 +110,9 @@
                     之后就可以通过 for 循环来循环显示文章列表数据了
                     -->
                     {% get_recent_posts as recent_post_list %}
-                    <ul>
+                    <ul class="list-group">
                         {% for post in recent_post_list %}
-                        <li>
+                        <li class="list-group-item">
                             <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                         </li>
                         {% endfor %}
@@ -177,9 +122,9 @@
                     <h3 class="widget-title">归档</h3>
                     <!-- 和上面获取最新文章列表一样  通过 archives获取归档列表-->
                     {% archives as date_list %}
-                    <ul>
+                    <ul class="list-group">
                         {% for date in date_list %}
-                        <li>
+                        <li class="list-group-item">
                             <a href="#">{{date.year}} 年 {{date.month}} 月</a>
                         </li>
                         {% empty %}
@@ -188,14 +133,17 @@
                     </ul>
                 </div>
 
+
+
                 <div class="widget widget-category">
                     <h3 class="widget-title">分类</h3>
                     <!-- 通过自定义标签 获取分类列表-->
                     {% get_categories as category_list %}
-                    <ul>
+                    <ul class="list-group">
                         {% for category in category_list %}
-                        <li>
-                            <a href="{% url 'blog:category' category.pk %}">{{category.name}}<span class="post-count">({{ category.num_posts}})</span></a>
+                        <li class="list-group-item">
+                         <span class="badge">{{ category.num_posts}}</span>
+                            <a href="{% url 'blog:category' category.pk %}">{{category.name}}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -204,16 +152,13 @@
                 <div class="widget widget-tag-cloud">
                     <h3 class="widget-title">标签云</h3>
                     {% get_tag as tag_list %}
-                    <ul>
+                    <ul class="list-group">
                         {% for Tag in tag_list %}
-                        <li>
+                        <li class="list-group-item">
                             <a href="{% url 'blog:tag' Tag.pk %}">{{Tag.name}}</a>
                         </li>
                         {% endfor %}
                     </ul>
-                </div>
-                <div class="rss">
-                    <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
                 </div>
             </aside>
         </div>
@@ -231,19 +176,6 @@
         </div>
     </div>
 </footer>
-
-<!-- Mobile Menu -->
-<div class="overlay overlay-hugeinc">
-    <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
-    <nav>
-        <ul>
-            <li><a href="index.html">首页</a></li>
-            <li><a href="full-width.html">博客</a></li>
-            <li><a href="about.html">关于</a></li>
-            <li><a href="contact.html">联系</a></li>
-        </ul>
-    </nav>
-</div>
 
 </body>
 </html>

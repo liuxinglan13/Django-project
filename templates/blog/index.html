@@ -6,8 +6,8 @@
         <li class="list-group-item">
               <header class="index-entry-header">
                   <!-- h1 标签 代表 标题-->
-                  <span class="post-author"><a href="#">{{ post.author }}</a></span>
-                  <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="{{ post.author.avatar.url }}">
+                  <!--<span class="label label-danger">{{ post.author }}</span>-->
+                  <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" src="{{ post.author.avatar.url }}" class="img-circle avatar-image-right">
                   <h1 class="entry-title">
                       <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
                   </h1>
@@ -25,16 +25,14 @@
                     </div>
                   <div class="entry-meta">
                       <!-- 分类名 -->
-                      <span><a href="#">{{ post.category.name}}</a></span>
+                      <span class="label label-default">{{ post.category.name}}</span>
                       <!--<a class="post-category post-category-design" href="#">{{ post.category.name}}</a>-->
                       <!-- 文章发布时间 -->
-                      <span class="post-date"><a href="#">{{post.created_time|timesince}}前</a></span>
-                      <!-- 作者 -->
-                      <span class="post-author"><a href="#">{{post.author}}</a></span>
+                      <span class="label label-primary">{{post.created_time|timesince}}前</span>
                       <!-- 评论数量 post.comment_set.count 查询出该篇文章下的所有评论列表 .count 统计总数-->
-                      <span class="comments-link"><a href="#">评论数:{{ post.comment_set.count }}</a></span>
+                      <span class="glyphicon glyphicon-comment">{{ post.comment_set.count }}</span>
                       <!-- 阅读量-->
-                      <span class="views-count"><a href="#">阅读量:{{ post.views }}</a></span>
+                      <span class="glyphicon glyphicon-eye-open">{{ post.views }}</span>
                   </div>
                     </header>
 
