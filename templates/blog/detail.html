@@ -4,17 +4,17 @@
 {% block main %}
     <ul class="list-group">
         <li class="list-group-item">
-    <header class="entry-header">
+    <header class="detail-header">
      <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" class="img-circle avatar-image-right" src="{{ post.author.avatar.url }}">
     <h1 class="entry-title">{{ post.title }}</h1>
     <div class="entry-meta">
       <span class="label label-default">{{ post.category.name}}</span>
       <span class="label label-primary">{{post.created_time|timesince}}前</span>
-      <span class="glyphicon glyphicon-comment">{{ post.comment_set.count }}</span>
-        <span class="glyphicon glyphicon-eye-open">{{ post.views }}</span>
+      <!--<span class="glyphicon glyphicon-comment">{{ post.comment_set.count }}</span>-->
+        <!--<span class="glyphicon glyphicon-eye-open">{{ post.views }}</span>-->
     </div>
   </header>
-  <div>
+  <div class="detail-post-body">
     {{ post.body|safe}}
   </div>
         <!-- 评论列表显示的部分-->
