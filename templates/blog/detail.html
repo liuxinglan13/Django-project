@@ -17,6 +17,13 @@
   <div class="detail-post-body">
     {{ post.body|safe}}
   </div>
+
+   <!--编辑文章的图标         -->
+   {% if user.is_authenticated %}
+   <a class="btn btn-default" href="{% url 'blog:post_edit' pk=post.pk %}">
+        <span class="glyphicon glyphicon-pencil"></span></a>
+   {% else %}
+   {% endif %}
         <!-- 评论列表显示的部分-->
         {% include 'easy_comment/comment_list.html' with post=post %}
             <!-- 下面是评论输入框相关代码-->

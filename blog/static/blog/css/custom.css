@@ -9,7 +9,7 @@
        background: #fff;
     }
    .avatar-image-right {
-       float: right;
+       float: left;
     }
    .h1, h1 {
        font-size: 25px;

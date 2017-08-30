@@ -271,3 +271,19 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/newpost.html', {'form': form})
+
+
+# 编辑文字视图
+
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/newpost.html', {'form': form})
+

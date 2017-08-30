@@ -4,26 +4,20 @@
 <ul class="list-group">
     {% for post in post_list %}
         <li class="list-group-item">
-              <header class="index-entry-header">
+              <div>
                   <!-- h1 标签 代表 标题-->
                   <!--<span class="label label-danger">{{ post.author }}</span>-->
-                  <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" src="{{ post.author.avatar.url }}" class="img-circle avatar-image-right">
+                  <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" src="{{ post.author.avatar.url }}" class="img-circle ">
+                  <div>
                   <h1 class="entry-title">
                       <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
                   </h1>
-
 
                   <div class="entry-content clearfix">
                         <!-- 帖子的摘要 -->
                         <p>{{ post.excerpt }}</p>
 
-                        <!--    继续阅读按钮
-                        <div class="read-more cl-effect-14">
-                            <a href="{{ post.get_absolute_url }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
-                        </div>
-                        -->
                     </div>
-                  <div class="entry-meta">
                       <!-- 分类名 -->
                       <span class="label label-default">{{ post.category.name}}</span>
                       <!--<a class="post-category post-category-design" href="#">{{ post.category.name}}</a>-->
@@ -34,8 +28,7 @@
                       <!--&lt;!&ndash; 阅读量&ndash;&gt;-->
                       <!--<span class="glyphicon glyphicon-eye-open">{{ post.views }}</span>-->
                   </div>
-                    </header>
-
+              </div>
         </li>
     {% empty %}
         <div class="no-post">暂时还没有发布的文章！</div>
