@@ -1,0 +1,44 @@
+<!-- 模板继承自base.html    main 和 toc 都是占位框-->
+<!-- 在非admin后台的地方使用django-ckeditor，需要引入这两个js -->
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+    <form method="POST" class="post-form">{% csrf_token %}
+        <div class="panel panel-default">
+        <div class="panel-heading">
+        <h3 class="panel-title">标题</h3>
+        </div>
+        <div class="panel-body">
+        {{ form.title }}
+        {{ form.title.errors }}
+        </div>
+        </div>
+          <div class="panel panel-default">
+        <div class="panel-heading">
+        <h3 class="panel-title">分类</h3>
+        </div>
+        <div class="panel-body">
+        {{ form.category }}
+        {{ form.category.errors}}
+        </div>
+        </div>
+         <div class="panel panel-default">
+        <div class="panel-heading">
+        <h3 class="panel-title">正文</h3>
+        </div>
+        <div class="panel-body">
+        {{ form.body}}
+        {{ form.body.errors}}
+        </div>
+        </div>
+        <button type="submit" class="save btn btn-default">发布</button>
+    </form>
+
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
+{% endblock main %}
+{% block toc %}
+
+{% endblock toc %}

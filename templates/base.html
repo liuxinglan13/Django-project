@@ -16,7 +16,7 @@
     <!--<link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">-->
     <!--自定义的css用来覆盖bootstrap的默认样式-->
     <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
-    <!--<link rel="stylesheet" href="{% static 'blog/css/prism.css' %}">-->
+    <link rel="stylesheet" href="{% static 'blog/css/prism.css' %}">
     <!--<link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">-->
 
     <!--这两个第三方评论系统easy_comment依赖的css文件-->
@@ -104,6 +104,15 @@
 
                 {% block toc %}
                 {% endblock toc %}
+                {% if user.is_authenticated %}
+                <div class="panel panel-default">
+                <div class="panel-body">
+                    <span class="glyphicon glyphicon-plus"><a href="{% url 'blog:post_new' %}"> 快速发布新帖子</a></span>
+                </div>
+                </div>
+                {% else %}
+                {% endif %}
+
                 <div class="panel panel-success">
                     <div class="panel-heading">
                     <h3 class="panel-title">最新文章</h3>

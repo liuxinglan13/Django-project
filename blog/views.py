@@ -1,6 +1,10 @@
 from django.shortcuts import get_object_or_404
 from .models import Post, Category, Tag
 from django.views.generic import ListView, DetailView
+from .forms import PostForm
+from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 
 # 类视图函数
 
@@ -253,3 +257,17 @@ class TagView(ListView):
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tag)
+
+
+# 发布新文章的视图
+
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+    else:
+        form = PostForm()
+    return render(request, 'blog/newpost.html', {'form': form})

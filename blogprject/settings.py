@@ -148,7 +148,7 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     'default': {
         # 编辑器的宽高请根据你的页面自行设置
-        'width':'686px',
+        'width':'716px',
         'height':'150px',
         'image_previewText':' ',
         'tabSpaces': 4,
@@ -157,7 +157,8 @@ CKEDITOR_CONFIGS = {
             ['Bold', 'Italic', 'Underline', 'Format', 'RemoveFormat'],
             ['NumberedList', 'BulletedList'],
             ['Blockquote', 'CodeSnippet'],
-            ['Image', 'Link', 'Unlink']
+            ['Image', 'Link', 'Unlink'],
+            ['Maximize']
         ],
         'extraPlugins': ','.join(['codesnippet','uploadimage','prism','widget','lineutils',]),
     }

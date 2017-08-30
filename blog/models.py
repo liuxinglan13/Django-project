@@ -31,7 +31,7 @@ class Tag(models.Model):
 class Post(models.Model):
 
     # 文章标题
-    title = models.CharField(max_length=70)
+    title = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
