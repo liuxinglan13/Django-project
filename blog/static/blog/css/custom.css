@@ -10,6 +10,9 @@
     }
    .avatar-image-right {
        float: left;
+       margin-top: 0.4cm;
+       margin-right: 0.3cm;
+
     }
    .h1, h1 {
        font-size: 25px;
@@ -23,4 +26,40 @@
     .detail-post-body {
         /*防止图片过大溢出div*/
         overflow:hidden
+    }
+
+    .media-body {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 0%;
+        -ms-flex: 1 1 0%;
+        flex: 1 1 0%;
+    }
+
+    .media1 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+    .w-100 {
+        width: 100%!important;
+    }
+
+    /*# index页 每个文章的评论数  css*/
+    .index-comment-count {
+        -webkit-align-self: center!important;
+    -ms-flex-item-align: center!important;
+    -ms-grid-row-align: center!important;
+    align-self: center!important;
+        display: -webkit-box!important;
+    display: -webkit-flex!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+        margin-left: 1rem!important;
+        margin-right: 0.5cm;
     }

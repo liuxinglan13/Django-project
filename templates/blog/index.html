@@ -4,30 +4,33 @@
 <ul class="list-group">
     {% for post in post_list %}
         <li class="list-group-item">
-              <div>
+              <div class="media1 w-100">
                   <!-- h1 标签 代表 标题-->
                   <!--<span class="label label-danger">{{ post.author }}</span>-->
-                  <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" src="{{ post.author.avatar.url }}" class="img-circle ">
-                  <div>
-                  <h1 class="entry-title">
-                      <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
-                  </h1>
+                  <img width="60" height="60" alt="Tilo Mitra&#x27;s avatar" src="{{ post.author.avatar.url }}" class="img-circle avatar-image-right ">
+                  <div class="media-body">
+                      <h1 class="entry-title">
+                          <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
+                      </h1>
 
-                  <div class="entry-content clearfix">
+                      <div>
                         <!-- 帖子的摘要 -->
                         <p>{{ post.excerpt }}</p>
-
-                    </div>
+                      </div>
                       <!-- 分类名 -->
                       <span class="label label-default">{{ post.category.name}}</span>
                       <!--<a class="post-category post-category-design" href="#">{{ post.category.name}}</a>-->
                       <!-- 文章发布时间 -->
                       <span class="label label-primary">{{post.created_time|timesince}}前</span>
-                      <!--&lt;!&ndash; 评论数量 post.comment_set.count 查询出该篇文章下的所有评论列表 .count 统计总数&ndash;&gt;-->
-                      <!--<span class="glyphicon glyphicon-comment">{{ post.comment_set.count }}</span>-->
+
+
                       <!--&lt;!&ndash; 阅读量&ndash;&gt;-->
                       <!--<span class="glyphicon glyphicon-eye-open">{{ post.views }}</span>-->
                   </div>
+                  <!--评论数量 post.comment_set.count 查询出该篇文章下的所有评论列表 .count 统计总数-->
+                    <div class="index-comment-count">
+                        <span class="badge badge-pill badge-default">{{ post.comment_set.count }}</span>
+                    </div>
               </div>
         </li>
     {% empty %}
