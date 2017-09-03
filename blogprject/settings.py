@@ -164,4 +164,4 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-# 富文本编辑器 相关配置
+ADMINS = (('admin', '87647703@qq.com'),)  # 网站管理员
