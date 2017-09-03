@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^notifications/', include(notifications.urls, namespace='notifications')),
     url(r'^users/', include('users.urls')),                     # 自定义的扩展用户app
     url(r'^users/', include('django.contrib.auth.urls')),       # Django内置的用户相关操作视图
+    url(r'^accounts/', include('allauth.urls')),                # django-allauth相关
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 没有这一句无法显示上传的图片

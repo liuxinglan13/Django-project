@@ -45,8 +45,29 @@ INSTALLED_APPS = [
     'notifications',
     'online_status',
     'users',               # 扩展用户模块（主要是头像上传，个人资料等，注册，登录，修改密码，重置密码）
-
+    'django.contrib.sites',     # DJango-allauth相关
+    'allauth',                  # DJango-allauth相关
+    'allauth.account',          # DJango-allauth相关
+    'allauth.socialaccount',    # DJango-allauth相关
+    # 下面是第三方账号相关的，比如我选了github
+    'allauth.socialaccount.providers.github',
 ]
+
+# django-allauth相关设置
+AUTHENTICATION_BACKENDS = (
+# django admin所使用的用户登录与django-allauth无关
+    'django.contrib.auth.backends.ModelBackend',
+
+# `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# 前面我们app里添加了django.contrib.sites,需要设置SITE_ID
+SITE_ID = 1
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+LOGIN_REDIRECT_URL = '/'
+
 
 COMMENT_ENTRY_MODEL = 'blog.Post'  # 格式是 app_name+model_name
 AUTH_USER_MODEL = 'users.User'     # 格式是 app_name+model_name
@@ -165,3 +186,16 @@ CKEDITOR_CONFIGS = {
 }
 
 ADMINS = (('admin', '87647703@qq.com'),)  # 网站管理员
+
+# Email setting
+# SMTP服务器，我使用的是sendclound的服务
+EMAIL_HOST = 'smtp.rokin.cn'
+EMAIL_HOST_USER = 'xiaodanqian@rokin.cn'
+EMAIL_HOST_PASSWORD = 'Qaz852.0'
+EMAIL_PORT = 25
+
+# 是否使用了SSL 或者TLS
+#EMAIL_USE_SSL = True
+#EMAIL_USE_TLS = True
+# 默认发件人，不设置的话django默认使用的webmaster@localhost
+DEFAULT_FROM_EMAIL = 'xiaodanqian <xiaodanqian@rokin.cn>'

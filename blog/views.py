@@ -3,8 +3,6 @@ from .models import Post, Category, Tag
 from django.views.generic import ListView, DetailView
 from .forms import PostForm
 from django.shortcuts import render
-from django.core.urlresolvers import reverse
-from django.shortcuts import redirect
 
 # 类视图函数
 
