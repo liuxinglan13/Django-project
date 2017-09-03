@@ -19,7 +19,8 @@
   </div>
 
    <!--编辑文章的图标         -->
-   {% if user.is_authenticated %}
+   <!--判断 当前用户是否是该篇文章的所有者         -->
+   {% if request.user == post.author %}
    <a class="btn btn-default" href="{% url 'blog:post_edit' pk=post.pk %}">
         <span class="glyphicon glyphicon-pencil"></span></a>
    {% else %}
