@@ -10,6 +10,7 @@ class User(AbstractUser):
                                  verbose_name='头像',
                                  # 图片将处理成85x85的尺寸
                                  processors=[ResizeToFill(150, 150)], )
+    print(avatar)
 
     # def save(self, *args, **kwargs):
     #     # 当用户更改头像的时候，avatar.name = '文件名'
@@ -22,6 +23,14 @@ class User(AbstractUser):
     #     # 调用父类的save()方法后，avatar.name就变成了'upload_to/用户名/文件名'
     #     # print('after:%s' % self.avatar.name)
     #     # print('avatar_path: %s' % self.avatar.path)
+
+    # def get_user_avatar(self):
+    #     if user.socialaccount_set.exists():
+    #         # 绑定了社交账户
+    #         return user.socialaccount_set.first().get_avatar_url()
+    #     return self.avatar.url  # 假设存储用户头像的 Field 为 avatar（通常为 ImageField）
+
+
 
     class Meta(AbstractUser.Meta):
         pass

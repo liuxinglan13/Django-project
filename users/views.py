@@ -51,14 +51,13 @@ def account_profile(request):
     if request.method == 'POST':
         # 使用getattr可以获得一个querydict，里面包含提交的内容
         request_dic = getattr(request, 'POST')
-        # print(request_dic)
-        # print(request.FILES)
-        # print(request.user.avatar.url)
+        print(request_dic)
+        print(request.FILES)
+        print(request.user.avatar.url)
         form = UserDetailForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             print('修改资料完成')
             form.save()
-            messages.append('资料修改成功！')
     # 如果是get请求，则使用user生成表单
     form = UserDetailForm(instance=request.user)
     return render(request, 'users/user_detail.html', context={'form':form,

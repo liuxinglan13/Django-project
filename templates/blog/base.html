@@ -68,12 +68,18 @@
         <li><a href="admin/" data-hover="后台">后台</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-
           {% if user.is_authenticated %}
           <!--站内通知-未读-->
-          <span class="glyphicon glyphicon-bell " aria-hidden="true"><a href="/notifications/">{% notifications_unread %}</a></span>
-
+          <li><a href="/notifications/">{% notifications_unread %}</a></li>
+          <!--<span class="glyphicon glyphicon-bell " aria-hidden="true"><a href="/notifications/">{% notifications_unread %}</a></span>-->
+          <!--判断当前用户是社会账号还是本地账号 调用不同头像-->
+          {% if user.socialaccount_set.exists %}
+          <!--这个可以直接调用 社交账户的头像-->
+          <img width="45" height="45" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="img-circle" alt="Responsive image">
+          {% else %}
+          <!--这个 是调用本地账户的头像-->
           <img width="45" height="45" src="{{ user.avatar.url }}" class="img-circle" alt="Responsive image">
+          {% endif %}
             <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -86,10 +92,8 @@
             </li>
 
           {% else %}
-          <li><a href="{% url 'account_login' %}?next={{ request.path }}" data-hover="登录">allauth登录</a></li>
-          <li><a href="{% url 'account_signup' %}?next={{ request.path }}" data-hover="登录">allauth注册</a></li>
-          <li><a href="{% url 'login' %}?next={{ request.path }}" data-hover="登录">登录</a></li>
-          <li><a href="{% url 'users:register' %}" data-hover="注册">注册</a></li>
+          <li><a href="{% url 'account_login' %}?next={{ request.path }}" data-hover="登录">登录</a></li>
+          <li><a href="{% url 'account_signup' %}?next={{ request.path }}" data-hover="注册">注册</a></li>
           {% endif %}
 
       </ul>

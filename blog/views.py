@@ -18,6 +18,7 @@ class IndexView(ListView):
     # 指定 paginate_by 属性后开启分页功能，其值代表每一页包含多少篇文章
     paginate_by = 6
 
+
     # 分页效果 加强
     # 类似这种效果 1..3 4 5..10  类似这种智能的效果
     # 通过扩展 类视图 自带的 paginate 实现
