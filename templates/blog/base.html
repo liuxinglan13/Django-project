@@ -48,6 +48,7 @@
 </head>
 
 <body class="body-qiansebeijing">
+
 <nav class="navbar navbar-inverse" >
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -70,7 +71,8 @@
       <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
           <!--站内通知-未读-->
-          <li><a href="/notifications/">{% notifications_unread %}</a></li>
+          <a href="/notifications/">通知 <span class="badge">{% notifications_unread %}</span></a>
+          <!--<li><a href="/notifications/">{% notifications_unread %}</a></li>-->
           <!--<span class="glyphicon glyphicon-bell " aria-hidden="true"><a href="/notifications/">{% notifications_unread %}</a></span>-->
           <!--&lt;!&ndash;判断当前用户是社会账号还是本地账号 调用不同头像(这样写不好。。比较好的写法还是 将社会话头像存储为本地头像后方便其他地方调用)&ndash;&gt;-->
           <!--{% if user.socialaccount_set.exists %}-->
