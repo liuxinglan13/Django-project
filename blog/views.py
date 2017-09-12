@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404
 from .models import Post, Category, Tag
-from django.views.generic import ListView, DetailView
-from .forms import PostForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from .forms import PostForm, PostCreateForm
 from django.shortcuts import render
+from braces.views import UserFormKwargsMixin
 
 # 类视图函数
 
@@ -259,30 +260,44 @@ class TagView(ListView):
 
 
 # 发布新文章的视图
+#
+# def post_new(request):
+#     if request.method == "POST":
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.author = request.user
+#             post.save()
+#     else:
+#         form = PostForm()
+#     return render(request, 'blog/newpost.html', {'form': form})
 
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-    else:
-        form = PostForm()
-    return render(request, 'blog/newpost.html', {'form': form})
+
+# # 基于类的创建数据视图  发布新文章的视图
+# UserFormKwargsMixin 自定义表单 http://django-braces.readthedocs.io/en/latest/form.html#userformkwargsmixin
+#  django-braces  依赖这个库
+class PostCreateView(UserFormKwargsMixin, CreateView):
+    form_class = PostCreateForm
+    template_name = 'blog/newpost.html'
 
 
-# 编辑文字视图
+# # 编辑文字视图
+#
+# def post_edit(request, pk):
+#     post = get_object_or_404(Post, pk=pk)
+#     if request.method == "POST":
+#         form = PostForm(request.POST, instance=post)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.author = request.user
+#             post.save()
+#     else:
+#         form = PostForm(instance=post)
+#     return render(request, 'blog/newpost.html', {'form': form})
 
-def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-    else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/newpost.html', {'form': form})
 
+# 编辑文章的类视图
+class PostEditView(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/newpost.html'
