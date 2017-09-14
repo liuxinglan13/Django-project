@@ -49,60 +49,62 @@
 
 <body class="body-qiansebeijing">
 
-<nav class="navbar navbar-inverse" >
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{% url 'blog:index' %}">首页</a>
-    </div>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'blog:index' %}">首页</a>
+        </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="admin/" data-hover="后台">后台</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          {% if user.is_authenticated %}
-          <!--站内通知-未读-->
-          <a href="/notifications/">通知 <span class="badge">{% notifications_unread %}</span></a>
-          <!--<li><a href="/notifications/">{% notifications_unread %}</a></li>-->
-          <!--<span class="glyphicon glyphicon-bell " aria-hidden="true"><a href="/notifications/">{% notifications_unread %}</a></span>-->
-          <!--&lt;!&ndash;判断当前用户是社会账号还是本地账号 调用不同头像(这样写不好。。比较好的写法还是 将社会话头像存储为本地头像后方便其他地方调用)&ndash;&gt;-->
-          <!--{% if user.socialaccount_set.exists %}-->
-          <!--&lt;!&ndash;这个可以直接调用 社交账户的头像&ndash;&gt;-->
-          <!--<img width="45" height="45" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="img-circle" alt="Responsive image">-->
-          <!--{% else %}-->
-          <!--&lt;!&ndash;这个 是调用本地账户的头像&ndash;&gt;-->
-          <!--<img width="45" height="45" src="{{ user.avatar.url }}" class="img-circle" alt="Responsive image">-->
-          <!--{% endif %}-->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="admin/" data-hover="后台">后台</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <!--站内通知-未读-->
+                <a href="/notifications/">通知 <span class="badge">{% notifications_unread %}</span></a>
+                <!--<li><a href="/notifications/">{% notifications_unread %}</a></li>-->
+                <!--<span class="glyphicon glyphicon-bell " aria-hidden="true"><a href="/notifications/">{% notifications_unread %}</a></span>-->
+                <!--&lt;!&ndash;判断当前用户是社会账号还是本地账号 调用不同头像(这样写不好。。比较好的写法还是 将社会话头像存储为本地头像后方便其他地方调用)&ndash;&gt;-->
+                <!--{% if user.socialaccount_set.exists %}-->
+                <!--&lt;!&ndash;这个可以直接调用 社交账户的头像&ndash;&gt;-->
+                <!--<img width="45" height="45" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="img-circle" alt="Responsive image">-->
+                <!--{% else %}-->
+                <!--&lt;!&ndash;这个 是调用本地账户的头像&ndash;&gt;-->
+                <!--<img width="45" height="45" src="{{ user.avatar.url }}" class="img-circle" alt="Responsive image">-->
+                <!--{% endif %}-->
 
-          <img width="45" height="45" src="{{ user.avatar.url }}" class="img-circle" alt="Responsive image">
-            <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="{% url 'logout' %}?next={{ request.path }}">注销登录</a></li>
-            <li><a href="{% url 'users:account_profile' %}?next={{ request.path }}">修改资料</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-             </ul>
-            </li>
+                <img width="45" height="45" src="{{ user.avatar_url }}" class="img-circle" alt="Responsive image">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'logout' %}?next={{ request.path }}">注销登录</a></li>
+                        <li><a href="{% url 'users:account_profile' %}?next={{ request.path }}">修改资料</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
 
-          {% else %}
-          <li><a href="{% url 'account_login' %}?next={{ request.path }}" data-hover="登录">登录</a></li>
-          <li><a href="{% url 'account_signup' %}?next={{ request.path }}" data-hover="注册">注册</a></li>
-          {% endif %}
+                {% else %}
+                <li><a href="{% url 'account_login' %}?next={{ request.path }}" data-hover="登录">登录</a></li>
+                <li><a href="{% url 'account_signup' %}?next={{ request.path }}" data-hover="注册">注册</a></li>
+                {% endif %}
 
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
 
 
@@ -124,16 +126,16 @@
                 {% endblock toc %}
                 {% if user.is_authenticated %}
                 <div class="panel panel-default">
-                <div class="panel-body">
-                    <span class="glyphicon glyphicon-plus"><a href="{% url 'blog:post_new' %}"> 快速发布新帖子</a></span>
-                </div>
+                    <div class="panel-body">
+                        <span class="glyphicon glyphicon-plus"><a href="{% url 'blog:post_new' %}"> 快速发布新帖子</a></span>
+                    </div>
                 </div>
                 {% else %}
                 {% endif %}
 
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                    <h3 class="panel-title">最新文章</h3>
+                        <h3 class="panel-title">最新文章</h3>
                     </div>
                     <!-- 使用自定义模板标签 通过使用 get_recent_posts 模板标签获取到最新文章列表，
                     然后我们通过 as 语法（Django 模板系统的语法）将获取的文章列表保存进了 recent_post_list 模板变量中，
@@ -150,7 +152,7 @@
                 </div>
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                    <h3 class="panel-title">归档</h3>
+                        <h3 class="panel-title">归档</h3>
                     </div>
                     <!-- 和上面获取最新文章列表一样  通过 archives获取归档列表-->
                     {% archives as date_list %}
@@ -166,7 +168,7 @@
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                    <h3 class="panel-title">分类</h3>
+                        <h3 class="panel-title">分类</h3>
                     </div>
                     <!-- 通过自定义标签 获取分类列表-->
                     <!--<div class="panel-body">-->
@@ -174,7 +176,7 @@
                     <ul class="list-group panel-body">
                         {% for category in category_list %}
                         <li class="list-group-item">
-                         <span class="badge">{{ category.num_posts}}</span>
+                            <span class="badge">{{ category.num_posts}}</span>
                             <a href="{% url 'blog:category' category.pk %}">{{category.name}}</a>
                         </li>
                         {% endfor %}
@@ -184,7 +186,7 @@
 
                 <div class="panel panel-danger">
                     <div class="panel-heading">
-                    <h3 class="panel-title">标签云</h3>
+                        <h3 class="panel-title">标签云</h3>
                     </div>
                     {% get_tag as tag_list %}
                     <ul class="list-group panel-body">

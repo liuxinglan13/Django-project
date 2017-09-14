@@ -30,7 +30,13 @@ class User(AbstractUser):
     #         return user.socialaccount_set.first().get_avatar_url()
     #     return self.avatar.url  # 假设存储用户头像的 Field 为 avatar（通常为 ImageField）
 
+    # 这个方法用来调取 社交化头像
+    def avatar_url(self):
+        # 判断 如果没有修改过默认头像 自动调用社交头像 如果自己自己修改过头像来就不调用来
+        avatar_name = self.avatar.name.rsplit('/', 1)[-1]
+        if avatar_name == 'default.png':
+            # 首先尝试从社交账户中获取头像
+            if self.socialaccount_set.exists():
+                return self.socialaccount_set.first().get_avatar_url()
 
-
-    class Meta(AbstractUser.Meta):
-        pass
+        return self.avatar.url
