@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+
+
+{% block main %}
+    <h1>Bookmark an image</h1>
+    <form class="profile" method="post" enctype="multipart/form-data"
+        action="{% url 'images:create' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="primaryAction" type="submit">上传</button>
+    </form>
+{% endblock %}
+

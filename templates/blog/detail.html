@@ -36,6 +36,10 @@
 
   {% csrf_token %}
 {% endblock main %}
-{% block toc %}
 
+{% block toc %}
 {% endblock toc %}
+
+{% block sidetool %}
+{% include "blog/sidetool.html" %}
+{% endblock %}

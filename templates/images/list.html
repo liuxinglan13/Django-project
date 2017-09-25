@@ -1,0 +1,59 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+{% block head %}
+<link href="{% static "images/css/base.css" %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block main %}
+<h1>照片墙</h1>
+<a href={% url "images:create" %}>上传图片</a>
+<div id="image-list">
+    {% include "images/list_ajax.html" %}
+</div>
+{% endblock %}
+{% block bottom %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
+<script type="text/javascript">
+    var csrftoken = $.cookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+    $(document).ready(function () {
+        var page = 1;
+        var empty_page = false;
+        var block_request = false;
+
+        $(window).scroll(function () {
+            var margin = $(document).height() - $(window).height() - 200;
+            if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+                block_request = true;
+                page += 1;
+                $.get('?page=' + page, function (data) {
+                    if (data == '') {
+                        empty_page = true;
+                    }
+                    else {
+                        block_request = false;
+                        $('#image-list').append(data);
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+{% endblock %}
+
+
