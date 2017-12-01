@@ -12,21 +12,29 @@ from taggit.managers import TaggableManager
 # Category 分类
 
 
-
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name="分类名")
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "分类"
+        verbose_name_plural = verbose_name
+
 
 # Tag 标签
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=70)
+    name = models.CharField(max_length=70, verbose_name="标签名")
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "标签"
+        verbose_name_plural = verbose_name
 
 # Post 文章
 
@@ -34,7 +42,7 @@ class Tag(models.Model):
 class Post(models.Model):
 
     # 文章标题
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, verbose_name="文章标题")
 
     def __str__(self):
         return self.title
@@ -57,12 +65,12 @@ class Post(models.Model):
         self.save(update_fields=['views'])
 
     # 文章的摘要（可以为空 下面save方法用来 自动提取文章摘要-从正文body中提取）
-    excerpt = models.CharField(max_length=200, blank=True)
+    excerpt = models.CharField(max_length=200, blank=True, verbose_name="文章摘要")
 
     # 文章的创建和最后一次修改时间
     # auto_now_add 自动保存当前时间 进数据
-    created_time = models.DateTimeField(auto_now_add=True)
-    modified_time = models.DateTimeField(auto_now_add=True)
+    created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    modified_time = models.DateTimeField(auto_now_add=True, verbose_name="最后修改时间")
 
 
     # 将上面创建的分类和标签与文章联系起来
@@ -70,16 +78,16 @@ class Post(models.Model):
     # 而对于标签来说，一篇文章可以有多个标签，同一个标签下也可能有多篇文章，所以我们使用 ManyToManyField，表明这是多对多的关联关系
     # 同时我们规定文章可以没有标签，因此为标签 tags 指定了 blank=True。
 
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, verbose_name="分类")
     tags = models.ManyToManyField(Tag, blank=True)
 
     # 文章作者，这里 User 是从 django.contrib.auth.models 导入的。
     # django.contrib.auth 是 Django 内置的应用，专门用于处理网站用户的注册、登录等流程，User 是 Django 为我们已经写好的用户模型。
     # 这里我们通过 ForeignKey 把文章和 User 关联了起来。
     # 因为我们规定一篇文章只能有一个作者，而一个作者可能会写多篇文章，因此这是一对多的关联关系，和 Category 类似。
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, verbose_name="作者")
 
-    taggs = TaggableManager(blank=True)
+    taggs = TaggableManager(blank=True, verbose_name="标签")
 
     # 提出文章正文摘要的方法
     def save(self, *args, **kwargs):
@@ -101,5 +109,7 @@ class Post(models.Model):
     # 定义一个 Meta 的内部类，这个内部类通过指定一些属性来规定这个类该有的一些特性
     # 这里指定排序方式 为创建时间  逆序  定义了这个方法后 就是说之后 POST这个表查询出来的东西默认都是逆序排列
     class Meta:
+        verbose_name = "帖子"
+        verbose_name_plural = verbose_name
         ordering = ['-created_time']
 

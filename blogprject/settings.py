@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'images',
     'sorl.thumbnail',
     'taggit',
+    'xadmin',
+    'crispy_forms'
 ]
 
 # django-allauth相关设置

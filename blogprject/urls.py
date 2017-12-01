@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 import notifications.urls
+import xadmin
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^xadmin/', xadmin.site.urls),
     url(r'', include('blog.urls', namespace='blog')),
     url(r'', include('ckeditor_uploader.urls')),   #富文本编辑器ckeditor相关
     url(r'', include('easy_comment.urls')),
