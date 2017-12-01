@@ -301,3 +301,5 @@ class PostEditView(UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/newpost.html'
+
+###
