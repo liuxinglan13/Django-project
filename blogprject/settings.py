@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'images',
     'sorl.thumbnail',
+    'taggit',
 ]
 
 # django-allauth相关设置
@@ -202,5 +203,5 @@ EMAIL_PORT = 25
 # 默认发件人，不设置的话django默认使用的webmaster@localhost
 DEFAULT_FROM_EMAIL = 'xiaodanqian <xiaodanqian@rokin.cn>'
 
-TEMPLATE_DEBUG = True
-THUMBNAIL_DEBUG = True
+# TEMPLATE_DEBUG = True
+# THUMBNAIL_DEBUG = True

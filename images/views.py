@@ -10,10 +10,7 @@ from django.contrib import messages
 @login_required
 def image_create(request):
     if request.method == 'POST':
-        request_dic = getattr(request, 'POST')
-        print(request_dic)
-        print(request.FILES)
-        print(request.user)
+        # request_dic = getattr(request, 'POST')
         form = ImageCreateForm(request.POST, request.FILES)
         if form.is_valid():
             new_item = form.save(commit=False)

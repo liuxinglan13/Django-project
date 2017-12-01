@@ -47,9 +47,7 @@
     {% block head %}
     {% endblock head %}
 </head>
-
 <body class="body-qiansebeijing">
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -75,17 +73,6 @@
                 {% if user.is_authenticated %}
                 <!--站内通知-未读-->
                 <a href="/notifications/">通知 <span class="badge">{% notifications_unread %}</span></a>
-                <!--<li><a href="/notifications/">{% notifications_unread %}</a></li>-->
-                <!--<span class="glyphicon glyphicon-bell " aria-hidden="true"><a href="/notifications/">{% notifications_unread %}</a></span>-->
-                <!--&lt;!&ndash;判断当前用户是社会账号还是本地账号 调用不同头像(这样写不好。。比较好的写法还是 将社会话头像存储为本地头像后方便其他地方调用)&ndash;&gt;-->
-                <!--{% if user.socialaccount_set.exists %}-->
-                <!--&lt;!&ndash;这个可以直接调用 社交账户的头像&ndash;&gt;-->
-                <!--<img width="45" height="45" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="img-circle" alt="Responsive image">-->
-                <!--{% else %}-->
-                <!--&lt;!&ndash;这个 是调用本地账户的头像&ndash;&gt;-->
-                <!--<img width="45" height="45" src="{{ user.avatar.url }}" class="img-circle" alt="Responsive image">-->
-                <!--{% endif %}-->
-
                 <img width="45" height="45" src="{{ user.avatar_url }}" class="img-circle" alt="Responsive image">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -155,6 +142,7 @@
         </div>
     </div>
 </footer>
+<!--这里边一般可以用来放 js代码-->
 {% block bottom %}
 {% endblock bottom %}
 </body>
