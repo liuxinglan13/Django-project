@@ -23,6 +23,7 @@ import xadmin
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'', include('blog.urls', namespace='blog')),
     url(r'', include('ckeditor_uploader.urls')),   #富文本编辑器ckeditor相关
     url(r'', include('easy_comment.urls')),
